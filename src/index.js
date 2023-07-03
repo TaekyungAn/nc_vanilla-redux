@@ -1,20 +1,13 @@
+import { legacy_createStore } from "redux";
+//react-redux 아님!
+// data를 넣는 장소
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const number = document.querySelector("span");
 
-let count = 0;
-number.innerText = count;
-const updateText = () => {
-  number.innerText = count;
+// reducer: data를 modify하는 함수
+const reducer = (state = 0) => {
+  return state;
 };
-const handleAdd = () => {
-  count = count + 1;
-  updateText();
-};
-const handleMinus = () => {
-  count = count - 1;
-  updateText();
-};
-
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+const countStore = legacy_createStore(reducer);
+console.log(countStore.getState());
