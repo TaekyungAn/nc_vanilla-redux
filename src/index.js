@@ -7,14 +7,20 @@ const number = document.querySelector("span");
 
 number.innerText = 0;
 
+const ADD = "ADD";
+const MINUS = "MINUS";
+
 // reducer: data를 modify하는 함수
 // action: reducer와 소통하기 위한 방법
 const reducer = (count = 0, action) => {
-  if (action.type === "ADD") {
-    return count + 1;
-  } else if (action.type === "MINUS") {
-    return count - 1;
-  } else return count;
+  switch (action.type) {
+    case ADD:
+      return count + 1;
+    case MINUS:
+      return count - 1;
+    default:
+      return count;
+  }
 };
 const countStore = legacy_createStore(reducer);
 
@@ -27,10 +33,10 @@ countStore.subscribe(onChange);
 
 // dispatch: Reducer에게 Action을 보내는 방법
 const handleAdd = () => {
-  countStore.dispatch({ type: "ADD" });
+  countStore.dispatch({ type: ADD });
 };
 const handleMinus = () => {
-  countStore.dispatch({ type: "MINUS" });
+  countStore.dispatch({ type: MINUS });
 };
 
 add.addEventListener("click", handleAdd);
