@@ -6,13 +6,13 @@ import { deleteToDo } from "../store";
 function Detail() {
   const id = useParams().id;
   const toDos = useSelector((state) => state);
-  const toDo = toDos.find((todo) => todo.id === parseInt(id));
+  const toDo = toDos.reducer.find((todo) => todo.id === parseInt(id));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleDel = () => {
     dispatch(deleteToDo(id));
-    navigate(-1);
+    navigate("/");
   };
   return (
     <>

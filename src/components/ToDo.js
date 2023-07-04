@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteToDo } from "../store";
 import { Link } from "react-router-dom";
-import Detail from "../routes/Detail";
 
 function ToDo({ text, id }) {
   const dispatch = useDispatch();
