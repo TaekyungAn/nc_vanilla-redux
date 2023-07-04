@@ -3,33 +3,31 @@ import { legacy_createStore } from "redux";
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-const addToDo = (text) => {
+export const addToDo = (text) => {
   return {
     type: ADD,
     text,
   };
 };
-const deleteToDo = (id) => {
+
+export const deleteToDo = (id) => {
   return {
     type: DELETE,
     id,
   };
 };
 
-const reducer = (state = [], action) => {
+const reducer = (state = ["hello"], action) => {
   switch (action.type) {
     case ADD:
-      return [{ text: action.text }, ...state];
+      return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE:
-      return state.filter((toDo) => toDo.id !== action.id);
-
+      return state.filter((toDo) => toDo !== action.id);
     default:
       return state;
   }
 };
 
 const store = legacy_createStore(reducer);
-
-store.subscribe();
 
 export default store;
