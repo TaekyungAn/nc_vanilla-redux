@@ -4,7 +4,7 @@ import { addToDo } from "../store";
 import ToDo from "../components/ToDo";
 function Home(props) {
   // **React Hook사용**
-  // useSelector를 통해 store의 state를 바로 가져옴 (getState기능)
+  // useSelector를 통해 store의 state를 바로 가져옴 (mapStateToProps 대체: getState기능)
   const toDos = useSelector((state) => state);
   // useDispatch는 mapDispatchToProps 대체: Redux store에서 dispatch 함수에 대한 참조를 반환
   const dispatch = useDispatch();
