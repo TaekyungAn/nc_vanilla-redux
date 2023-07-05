@@ -29,6 +29,7 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// configureStore: Redux Developer Tools 사용
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
