@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { addToDo } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../store";
 import ToDo from "../components/ToDo";
 function Home(props) {
   // **React Hook사용**
@@ -16,7 +16,7 @@ function Home(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    dispatch(addToDo(text));
+    dispatch(add(text));
     setText("");
   }
   return (

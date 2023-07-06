@@ -1,22 +1,19 @@
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
-import { combineReducers, legacy_createStore } from "redux";
+import { configureStore, createAction, createSlice } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-export const addToDo = createAction("ADD");
-export const deleteToDo = createAction("DELETE");
-console.log(addToDo, deleteToDo);
-
-// 경고: createReducer.ts:228 The object notation for `createReducer` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createReducer
-// 변경 후
-const reducer = createReducer([], (builder) => {
-  builder
-    .addCase(addToDo, (state, action) => {
+const toDos = createSlice({
+  name: "toDosReducer",
+  initialState: [],
+  reducers: {
+    add: (state, action) => {
       state.push({ text: action.payload, id: Date.now() });
-    })
-    .addCase(deleteToDo, (state, action) => {
+    },
+    remove: (state, action) => {
       return state.filter((toDo) => toDo.id !== parseInt(action.payload));
-    });
+    },
+  },
 });
 
 const persistConfig = {
@@ -24,9 +21,9 @@ const persistConfig = {
   storage,
 };
 const rootReducer = combineReducers({
-  reducer,
+  reducer: toDos.reducer,
 });
-
+console.log(toDos.actions);
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // configureStore: Redux Developer Tools 사용
@@ -35,5 +32,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
+export const { add, remove } = toDos.actions;
 
 export default store;
